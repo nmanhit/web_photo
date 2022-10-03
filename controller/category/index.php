@@ -1,11 +1,12 @@
-<?php
-require('/usr/local/lib/php/Smarty/Smarty.class.php');
-include('../../model/category.php');
+<?php declare(strict_types=1);
+require '../../model/category.php';
+require('../../configs/smarty.php');
 
-$smarty = new Smarty();
-$smarty->template_dir = '../../templates';
-$smarty->compile_dir  = '../../templates_c';
+$smarty = new Smarty_Photo();
+$categories = Tbl_Categories::all();
+$activeCategories = array_filter($categories, function ($v) {
+    return $v["is_active"] == 1;
+}, ARRAY_FILTER_USE_BOTH);
 
-$categories = getAllCategory();
-$smarty->assign_by_ref('categories', $categories);
+$smarty->assign_by_ref('categories', $activeCategories);
 $smarty->display('../views/category/index.tpl');

@@ -1,11 +1,11 @@
-<?php /* Smarty version 2.6.31, created on 2022-09-25 13:42:36
+<?php /* Smarty version 2.6.31, created on 2022-10-02 14:06:15
          compiled from ../views/category/index.tpl */ ?>
 <?php ob_start(); ?>
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Categories list</h3>
             <div class="panel-action">
-                <a href="/demo/Controller/category/create.php" class="btn btn-primary">New category</a>
+                <a href="/web_photo/Controller/category/create.php" class="btn btn-primary">New category</a>
             </div>
         </div>
         <div class="panel-body">
@@ -22,23 +22,44 @@
                     <?php $_from = $this->_tpl_vars['categories']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['v']):
 ?>
-                        <tr>
-                            <th scope="row"><?php echo $this->_tpl_vars['v']->id; ?>
+                        <tr id="category-<?php echo $this->_tpl_vars['v']['id']; ?>
+">
+                            <th scope="row"><?php echo $this->_tpl_vars['v']['id']; ?>
 </th>
-                            <td><?php echo $this->_tpl_vars['v']->name; ?>
+                            <td><?php echo $this->_tpl_vars['v']['name']; ?>
 </td>
-                            <td><?php echo $this->_tpl_vars['v']->description; ?>
+                            <td><?php echo $this->_tpl_vars['v']['description']; ?>
 </td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="/demo/Controller/category/edit.php?id=<?php echo $this->_tpl_vars['v']->id; ?>
+                                    <a href="/web_photo/Controller/category/edit.php?id=<?php echo $this->_tpl_vars['v']['id']; ?>
 " class="btn btn-primary">Edit</a>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button onclick="javascript:handleDeleteCategory(<?php echo $this->_tpl_vars['v']['id']; ?>
+)" type="button" class="btn btn-danger">Delete</button>
                                 </div>
                             </td>
                         </tr>
                     <?php endforeach; endif; unset($_from); ?>
                 </tbody>
+                <script type="text/javascript">
+                    <?php echo '
+                    function handleDeleteCategory(id) {
+                        const url = `/web_photo/Controller/category/delete.php?id=${id}`;
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("DELETE",url, true);
+                        xhr.onload = function () {
+                            const allRow = document.querySelector("table").rows;
+                            for (const row of allRow) {
+                                if(row.id === `category-${id}`) {
+                                    row.remove();
+                                }
+                            }
+                        }
+                        xhr.send(null);
+                    }
+                    '; ?>
+
+                </script>
             </table>
         </div>
     </div>

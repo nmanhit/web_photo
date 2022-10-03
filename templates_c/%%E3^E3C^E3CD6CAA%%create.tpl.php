@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-09-20 09:20:42
+<?php /* Smarty version 2.6.31, created on 2022-09-29 01:29:43
          compiled from ../views/category/create.tpl */ ?>
 <?php ob_start(); ?>
     <div class="panel panel-success">
@@ -6,22 +6,22 @@
             <h3 class="panel-title">Create Category</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="/web_photo/Controller/category/create.php" method="post">
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Name <span class="required">*</span></label>
                     <div class="col-sm-9">
-                        <input type="email" id="email" placeholder="Email" class="form-control">
+                        <input type="text" id="name" name="name" placeholder="Name" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
-                        <textarea rows="5" id="description" placeholder="Description" class="form-control"></textarea>
+                        <textarea rows="5" id="description" name="description" placeholder="Description" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                         <button type="button" class="btn btn-danger">Cancel</button>
                     </div>
                 </div>

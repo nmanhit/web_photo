@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-09-25 13:53:45
+<?php /* Smarty version 2.6.31, created on 2022-09-30 02:36:59
          compiled from ../views/category/edit.tpl */ ?>
 <?php ob_start(); ?>
     <div class="panel panel-success">
@@ -6,25 +6,28 @@
             <h3 class="panel-title">Edit Category</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="/web_photo/Controller/category/edit.php" method="post">
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Name <span class="required">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" id="name" placeholder="name" class="form-control" value="<?php echo $this->_tpl_vars['category']->name; ?>
+                        <input type="text" id="name" name="name" placeholder="name" class="form-control" value="<?php echo $this->_tpl_vars['category']['name']; ?>
 ">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
-                        <textarea rows="5" id="description" placeholder="Description" class="form-control"><?php echo $this->_tpl_vars['category']->description; ?>
+                        <textarea rows="5" id="description" name="description" placeholder="Description" class="form-control"><?php echo $this->_tpl_vars['category']['description']; ?>
 </textarea>
                     </div>
                 </div>
+                <textarea id="id" name="id" hidden value="<?php echo $this->_tpl_vars['category']['id']; ?>
+" placeholder="Id"><?php echo $this->_tpl_vars['category']['id']; ?>
+</textarea>
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="/demo/Controller/category/index.php" class="btn btn-danger">Cancel</a>
+                        <a href="/web_photo/Controller/category/index.php" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
             </form>
