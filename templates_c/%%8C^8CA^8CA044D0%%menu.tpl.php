@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-09-26 02:25:40
+<?php /* Smarty version 2.6.31, created on 2022-10-05 08:16:25
          compiled from menu.tpl */ ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -13,7 +13,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/web_photo/Controller/category/index.php">Categories</a></li>
+                <li class="active"><a href="/web_photo/index.php?controller=category&action=index">Categories</a></li>
                 <li><a href="/web_photo/Controller/user/sign_up.php">User</a></li>
                 <li><a href="/web_photo/Controller/photo/index.php">My Photo</a></li>
             </ul>
