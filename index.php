@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+session_start();
 
 include(__DIR__ . "/configs/constant.php");
 
