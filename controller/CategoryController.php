@@ -4,13 +4,14 @@ declare(strict_types=1);
 include 'BaseController.php';
 include 'model/Category.php';
 include 'helpers/Html.php';
+include 'helpers/Uploader.php';
 
 use model\Category as Category;
 use helpers\Html as HtmlHelper;
+use helpers\Uploader as Uploader;
 
 class CategoryController extends BaseController
 {
-
     public function actionIndex()
     {
         $category = new Category();
@@ -27,12 +28,23 @@ class CategoryController extends BaseController
         if ($this->isPostMethod()) {
             $name = HtmlHelper::htmlSpecialChars($_POST['name']);
             $description = HtmlHelper::htmlSpecialChars($_POST['description']);
+            $photo = HtmlHelper::htmlSpecialChars($_FILES['photo']);
+
             $token = HtmlHelper::htmlSpecialChars($_POST['token']);
             $this->validateToken($token);
+
+            $photoName = "";
+            if(!empty($photo)) {
+                $uploader = new Uploader();
+                $result = $uploader->uploadFile('photo');
+                if($result["isError"]) $this->display("error/index.tpl");
+                $photoName = $result["photoName"];
+            }
 
             $category = new Category();
             $category->name = $name;
             $category->description = $description;
+            $category->photo = $photoName;
             $category->insertOrUpdate();
             $this->redirect("category");
             return;
