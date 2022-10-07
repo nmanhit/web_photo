@@ -29,4 +29,10 @@ class BaseController
         $url = BASE_URL . "/index.php?controller=".$controller."&action=".$action;
         header('Location: ' . $url, true, $permanent ? 301 : 302);
     }
+
+    public function validateToken($token): void {
+        if (!$token || $token !== $_SESSION['token']) {
+            $this->display("error/index.tpl");
+        }
+    }
 }

@@ -24,17 +24,22 @@ class CategoryController extends BaseController
 
     public function actionCreate()
     {
-        $this->display("category/create.tpl");
         if ($this->isPostMethod()) {
             $name = HtmlHelper::htmlSpecialChars($_POST['name']);
             $description = HtmlHelper::htmlSpecialChars($_POST['description']);
+            $token = HtmlHelper::htmlSpecialChars($_POST['token']);
+            $this->validateToken($token);
 
             $category = new Category();
             $category->name = $name;
             $category->description = $description;
             $category->insertOrUpdate();
             $this->redirect("category");
+            return;
         }
+        $_SESSION['token'] = bin2hex(random_bytes(35));
+        $this->smarty->assign('token', $_SESSION['token']);
+        $this->display("category/create.tpl");
     }
 
     public function actionEdit(): void
@@ -42,6 +47,8 @@ class CategoryController extends BaseController
         $id = HtmlHelper::htmlSpecialChars($_POST['id']);
         $name = HtmlHelper::htmlSpecialChars($_POST['name']);
         $description = HtmlHelper::htmlSpecialChars($_POST['description']);
+        $token = HtmlHelper::htmlSpecialChars($_POST['token']);
+        $this->validateToken($token);
 
         $category = new Category();
         $category->id = (int)$id;
@@ -53,10 +60,13 @@ class CategoryController extends BaseController
 
     public function actionDetail()
     {
+        $_SESSION['token'] = bin2hex(random_bytes(35));
         $category = new Category();
         $id = HtmlHelper::htmlSpecialChars($_GET['id']);
         $_category = $category->findById($id);
+
         $this->smarty->assign('category', $_category);
+        $this->smarty->assign('token', $_SESSION['token']);
         $this->display("category/edit.tpl");
     }
 

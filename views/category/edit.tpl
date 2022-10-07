@@ -24,6 +24,7 @@
                         <a href="{$BASE_URL}index.php?controller=category&action=index" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
+                <input type="hidden" name="token" value="{$token}" />
             </form>
         </div>
     </div>
