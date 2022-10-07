@@ -35,6 +35,20 @@ body {
     font-style: italic;
 }
 
+.category-img {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.category-list-img {
+    width: 50px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
 .footer-bs {
     background-color: #3c3d41;
     padding: 30px 15px;

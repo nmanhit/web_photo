@@ -11,6 +11,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Photo</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
                     <th scope="col" style="width: 135px">Action</th>
@@ -20,6 +21,9 @@
                     {foreach from=$categories key=k item=v}
                         <tr id="category-{$v.id}">
                             <th scope="row">{$v.id}</th>
+                            <th scope="row">
+                                <img class="category-list-img" src="{$BASE_URL}static/upload/{$v.photo}" />
+                            </th>
                             <td>{$v.name}</td>
                             <td>{$v.description}</td>
                             <td>

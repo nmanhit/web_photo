@@ -17,6 +17,12 @@
                         <textarea rows="5" id="description" name="description" placeholder="Description" class="form-control">{$category.description}</textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="photo" class="col-sm-3 control-label">Photo</label>
+                    <div class="col-sm-9">
+                        <img class="category-img" src="{$BASE_URL}static/upload/{$category.photo}" />
+                    </div>
+                </div>
                 <input id="id" name="id" type="hidden" value="{$category.id}" placeholder="Id" />
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
