@@ -1,11 +1,11 @@
-<?php /* Smarty version 2.6.31, created on 2022-10-02 14:06:15
-         compiled from ../views/category/index.tpl */ ?>
+<?php /* Smarty version 2.6.31, created on 2022-10-06 09:53:27
+         compiled from /usr/local/var/www/web_photo/configs/..//views/category/index.tpl */ ?>
 <?php ob_start(); ?>
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Categories list</h3>
             <div class="panel-action">
-                <a href="/web_photo/Controller/category/create.php" class="btn btn-primary">New category</a>
+                <a href="/web_photo/index.php?controller=category&action=create" class="btn btn-primary">New category</a>
             </div>
         </div>
         <div class="panel-body">
@@ -32,7 +32,7 @@
 </td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="/web_photo/Controller/category/edit.php?id=<?php echo $this->_tpl_vars['v']['id']; ?>
+                                    <a href="/web_photo/index.php?controller=category&action=detail&id=<?php echo $this->_tpl_vars['v']['id']; ?>
 " class="btn btn-primary">Edit</a>
                                     <button onclick="javascript:handleDeleteCategory(<?php echo $this->_tpl_vars['v']['id']; ?>
 )" type="button" class="btn btn-danger">Delete</button>
@@ -44,7 +44,7 @@
                 <script type="text/javascript">
                     <?php echo '
                     function handleDeleteCategory(id) {
-                        const url = `/web_photo/Controller/category/delete.php?id=${id}`;
+                        const url = `/web_photo?controller=category&action=delete&id=${id}`;
                         const xhr = new XMLHttpRequest();
                         xhr.open("DELETE",url, true);
                         xhr.onload = function () {

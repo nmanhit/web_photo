@@ -1,12 +1,12 @@
-<?php /* Smarty version 2.6.31, created on 2022-09-29 01:29:43
-         compiled from ../views/category/create.tpl */ ?>
+<?php /* Smarty version 2.6.31, created on 2022-10-06 13:55:22
+         compiled from /usr/local/var/www/web_photo/configs/../views/category/create.tpl */ ?>
 <?php ob_start(); ?>
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Create Category</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" action="/web_photo/Controller/category/create.php" method="post">
+            <form class="form-horizontal" role="form" action="/web_photo/index.php?controller=category&action=create" method="post">
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Name <span class="required">*</span></label>
                     <div class="col-sm-9">
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary">Create</button>
-                        <button type="button" class="btn btn-danger">Cancel</button>
+                        <a href="/web_photo/index.php?controller=category&action=index" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
             </form>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-09-22 02:38:10
+<?php /* Smarty version 2.6.31, created on 2022-10-05 08:16:25
          compiled from menu.tpl */ ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -13,9 +13,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/demo/Controller/category/index.php">Categories</a></li>
-                <li><a href="/demo/Controller/user/sign_up.php">User</a></li>
-                <li><a href="/demo/Controller/photo/index.php">My Photo</a></li>
+                <li class="active"><a href="/web_photo/index.php?controller=category&action=index">Categories</a></li>
+                <li><a href="/web_photo/Controller/user/sign_up.php">User</a></li>
+                <li><a href="/web_photo/Controller/photo/index.php">My Photo</a></li>
             </ul>
 
             <form class="navbar-form navbar-right">
@@ -26,7 +26,7 @@
                     <input type="password" placeholder="Password" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-success">Log in</button>
-                <a href="/demo/Controller/user/sign_up.php" class="btn btn-primary">Sign up</a>
+                <a href="/web_photo/Controller/user/sign_up.php" class="btn btn-primary">Sign up</a>
             </form>
         </div><!--/.nav-collapse -->
     </div>

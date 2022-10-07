@@ -5,5 +5,5 @@
         </div>
     </div>
 </footer>
-<script src="../../libraries/jquery/index.min.js"></script>
-<script src="../../libraries/bootstrap/bootstrap.min.js"></script>
+<script src="{$BASE_URL}static/jquery/index.min.js"></script>
+<script src="{$BASE_URL}static/bootstrap/bootstrap.min.js"></script>
