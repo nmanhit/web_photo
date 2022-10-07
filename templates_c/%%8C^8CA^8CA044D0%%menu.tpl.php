@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-10-07 06:34:33
+<?php /* Smarty version 2.6.31, created on 2022-10-07 08:34:23
          compiled from menu.tpl */ ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -30,7 +30,7 @@ Controller/photo/index.php">My Photo</a></li>
                 </div>
                 <button type="submit" class="btn btn-success">Log in</button>
                 <a href="<?php echo $this->_tpl_vars['BASE_URL']; ?>
-Controller/user/sign_up.php" class="btn btn-primary">Sign up</a>
+index.php?controller=user&action=create" class="btn btn-primary">Sign up</a>
             </form>
         </div><!--/.nav-collapse -->
     </div>

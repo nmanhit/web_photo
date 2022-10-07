@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-const BASE_URL = "http://localhost/demo/";
+const BASE_URL = "http://localhost/web_photo/";
 const DB_HOST = "localhost";
 const DB_USERNAME = "root";
-const DB_PASSWORD = "";
+const DB_PASSWORD = "05003539172";
 const DB_DATABASE = "db_photo";
 
 const BASE_DIR = __DIR__ . "/..";
