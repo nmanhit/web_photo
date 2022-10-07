@@ -2,9 +2,8 @@
 declare(strict_types=1);
 namespace model;
 
-include "database/database.php";
-
-use database\Database as Database;
+use helpers\Database as Database;
+use helpers\FormatConverter as FormatConverter;
 
 class BaseModel
 {
@@ -105,7 +104,7 @@ class BaseModel
 
     protected function insert(): bool
     {
-        $currentTime = strtotime(date('Y-m-d H:i:s'));
+        $currentTime = FormatConverter::getCurrentTime();
         $this->properties["is_active"] = ACTIVE;
         $this->properties["create_time"] = $currentTime;
         $this->properties["update_time"] = $currentTime;

@@ -12,8 +12,10 @@ $controller = $controller_get . CONTROLLER_SUFFIX;
 $action = ACTION_PREFIX . $action_get;
 
 spl_autoload_register(function ($class_name) {
+    echo $class_name;
     include "controller/" . $class_name . ".php";
     if (!class_exists($class_name, false)) {
+        echo $class_name;
         throw new LogicException("Unable to load class: $class_name");
     }
 });

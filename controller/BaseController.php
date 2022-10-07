@@ -19,7 +19,7 @@ class BaseController
         $this->smarty->display(BASE_DIR . '/views/' . $template);
     }
 
-    public function isPost(): bool
+    public function isPostMethod(): bool
     {
         return $_SERVER['REQUEST_METHOD'] === "POST";
     }

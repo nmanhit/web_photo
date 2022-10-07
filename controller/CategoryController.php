@@ -24,7 +24,7 @@ class CategoryController extends BaseController
     public function actionCreate()
     {
         $this->display("category/create.tpl");
-        if ($this->isPost()) {
+        if ($this->isPostMethod()) {
             $name = HtmlHelper::htmlSpecialChars($_POST['name']);
             $description = HtmlHelper::htmlSpecialChars($_POST['description']);
 
@@ -62,9 +62,15 @@ class CategoryController extends BaseController
     public function actionDelete()
     {
         $id = HtmlHelper::htmlSpecialChars($_POST['id']);
+
         $category = new Category();
+        $_category = $category->findById($id);
+        if(!isset($_category)) {
+
+        }
+
         $category->id = (int)$id;
-        $category->is_active = 0;
+        $category->is_active = INACTIVE;
         $category->save();
     }
 }
