@@ -4,7 +4,7 @@
         <h3 class="panel-title">Oops!</h3>
     </div>
     <div class="panel-body">
-        {$errorMessage}
+        Something went wrong
     </div>
 </div>
 {/capture}

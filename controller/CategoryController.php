@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 include 'BaseController.php';
 include 'model/Category.php';
+include 'helpers/Html.php';
 
 use model\Category as Category;
 use helpers\Html as HtmlHelper;
@@ -31,7 +32,7 @@ class CategoryController extends BaseController
             $category = new Category();
             $category->name = $name;
             $category->description = $description;
-            $category->save();
+            $category->insertOrUpdate();
             $this->redirect("category");
         }
     }
@@ -46,7 +47,7 @@ class CategoryController extends BaseController
         $category->id = (int)$id;
         $category->name = $name;
         $category->description = $description;
-        $category->save();
+        $category->insertOrUpdate();
         $this->redirect("category");
     }
 
@@ -59,18 +60,17 @@ class CategoryController extends BaseController
         $this->display("category/edit.tpl");
     }
 
-    public function actionDelete()
+    public function actionDelete(): void
     {
-        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
-
+        $id = HtmlHelper::htmlSpecialChars($_GET['id']);
         $category = new Category();
         $_category = $category->findById($id);
-        if(!isset($_category)) {
-
+        if(!isset($_category) || count($_category) < 1) {
+            $this->redirect("category", "create");
         }
 
         $category->id = (int)$id;
         $category->is_active = INACTIVE;
-        $category->save();
+        $category->insertOrUpdate();
     }
 }

@@ -26,7 +26,7 @@ class BaseController
 
     public function redirect($controller, $action = "index", $permanent = false): void
     {
-        $url = "/index.php?controller=".$controller."&action=".$action;
-        header('Location: ' . getenv("BASE_URL") . $url, true, $permanent ? 301 : 302);
+        $url = BASE_URL . "/index.php?controller=".$controller."&action=".$action;
+        header('Location: ' . $url, true, $permanent ? 301 : 302);
     }
 }

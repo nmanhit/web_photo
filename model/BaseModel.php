@@ -2,6 +2,9 @@
 declare(strict_types=1);
 namespace model;
 
+include "helpers/Database.php";
+include "helpers/FormatConverter.php";
+
 use helpers\Database as Database;
 use helpers\FormatConverter as FormatConverter;
 
@@ -60,6 +63,7 @@ class BaseModel
     {
         $sql = "SELECT * FROM {$this->table_name()} WHERE " . $this->id_field . "=?;";
         $result = $this->db->execQuery($sql, array($id));
+        if($result -> num_rows < 1) return [];
         return mysqli_fetch_assoc($result);
     }
 
@@ -80,7 +84,7 @@ class BaseModel
         return $propertiesSet;
     }
 
-    public function save(): bool
+    public function insertOrUpdate(): bool
     {
         $this->properties = $this->getProperties();
         if ($this->exists()) {
