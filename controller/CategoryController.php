@@ -66,11 +66,12 @@ class CategoryController extends BaseController
         $category = new Category();
         $_category = $category->findById($id);
         if(!isset($_category) || count($_category) < 1) {
-            $this->redirect("category", "create");
+            $this->display("error/index.tpl");
         }
 
         $category->id = (int)$id;
         $category->is_active = INACTIVE;
         $category->insertOrUpdate();
+        $this->redirect("category");
     }
 }
