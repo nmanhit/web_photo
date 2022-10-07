@@ -12,8 +12,8 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{$BASE_URL}/index.php?controller=category&action=index">Categories</a></li>
-                <li><a href="{$BASE_URL}/Controller/user/sign_up.php">User</a></li>
-                <li><a href="{$BASE_URL}/Controller/photo/index.php">My Photo</a></li>
+                <li><a href="{$BASE_URL}Controller/user/sign_up.php">User</a></li>
+                <li><a href="{$BASE_URL}Controller/photo/index.php">My Photo</a></li>
             </ul>
 
             <form class="navbar-form navbar-right">
@@ -24,7 +24,7 @@
                     <input type="password" placeholder="Password" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-success">Log in</button>
-                <a href="{$BASE_URL}/Controller/user/sign_up.php" class="btn btn-primary">Sign up</a>
+                <a href="{$BASE_URL}Controller/user/sign_up.php" class="btn btn-primary">Sign up</a>
             </form>
         </div><!--/.nav-collapse -->
     </div>

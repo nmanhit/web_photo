@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace configs;
 
+include_once "constant.php";
+
 class database
 {
     protected string $host;
@@ -11,9 +13,9 @@ class database
 
     public function __construct()
     {
-        $this->host = getenv("DB_HOST");
-        $this->username = getenv("DB_USERNAME");
-        $this->password = getenv("DB_PASSWORD");
-        $this->database = getenv("DB_DATABASE");
+        $this->host = DB_HOST;
+        $this->username = DB_USERNAME ;
+        $this->password = DB_PASSWORD;
+        $this->database = DB_DATABASE;
     }
 }

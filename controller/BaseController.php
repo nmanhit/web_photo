@@ -19,14 +19,14 @@ class BaseController
         $this->smarty->display(BASE_DIR . '/views/' . $template);
     }
 
-    public function isPost(): bool
+    public function isPostMethod(): bool
     {
         return $_SERVER['REQUEST_METHOD'] === "POST";
     }
 
     public function redirect($controller, $action = "index", $permanent = false): void
     {
-        $url = "/index.php?controller=".$controller."&action=".$action;
-        header('Location: ' . getenv("BASE_URL") . $url, true, $permanent ? 301 : 302);
+        $url = BASE_URL . "/index.php?controller=".$controller."&action=".$action;
+        header('Location: ' . $url, true, $permanent ? 301 : 302);
     }
 }

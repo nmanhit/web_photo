@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <h3 class="panel-title">Categories list</h3>
             <div class="panel-action">
-                <a href="/web_photo/index.php?controller=category&action=create" class="btn btn-primary">New category</a>
+                <a href="{$BASE_URL}index.php?controller=category&action=create" class="btn btn-primary">New category</a>
             </div>
         </div>
         <div class="panel-body">
@@ -24,31 +24,13 @@
                             <td>{$v.description}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="/web_photo/index.php?controller=category&action=detail&id={$v.id}" class="btn btn-primary">Edit</a>
-                                    <button onclick="javascript:handleDeleteCategory({$v.id})" type="button" class="btn btn-danger">Delete</button>
+                                    <a href="{$BASE_URL}index.php?controller=category&action=detail&id={$v.id}" class="btn btn-primary">Edit</a>
+                                    <a href="{$BASE_URL}index.php?controller=category&action=delete&id={$v.id}" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>
                     {/foreach}
                 </tbody>
-                <script type="text/javascript">
-                    {literal}
-                    function handleDeleteCategory(id) {
-                        const url = `/web_photo?controller=category&action=delete&id=${id}`;
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("DELETE",url, true);
-                        xhr.onload = function () {
-                            const allRow = document.querySelector("table").rows;
-                            for (const row of allRow) {
-                                if(row.id === `category-${id}`) {
-                                    row.remove();
-                                }
-                            }
-                        }
-                        xhr.send(null);
-                    }
-                    {/literal}
-                </script>
             </table>
         </div>
     </div>

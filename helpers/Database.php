@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace database;
-
+namespace helpers;
 include "configs/database.php";
 
 use configs\database as databaseConfig;

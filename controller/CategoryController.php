@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 include 'BaseController.php';
 include 'model/Category.php';
+include 'helpers/Html.php';
 
 use model\Category as Category;
 use helpers\Html as HtmlHelper;
@@ -24,14 +25,14 @@ class CategoryController extends BaseController
     public function actionCreate()
     {
         $this->display("category/create.tpl");
-        if ($this->isPost()) {
+        if ($this->isPostMethod()) {
             $name = HtmlHelper::htmlSpecialChars($_POST['name']);
             $description = HtmlHelper::htmlSpecialChars($_POST['description']);
 
             $category = new Category();
             $category->name = $name;
             $category->description = $description;
-            $category->save();
+            $category->insertOrUpdate();
             $this->redirect("category");
         }
     }
@@ -46,25 +47,31 @@ class CategoryController extends BaseController
         $category->id = (int)$id;
         $category->name = $name;
         $category->description = $description;
-        $category->save();
+        $category->insertOrUpdate();
         $this->redirect("category");
     }
 
     public function actionDetail()
     {
         $category = new Category();
-        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
+        $id = HtmlHelper::htmlSpecialChars($_GET['id']);
         $_category = $category->findById($id);
         $this->smarty->assign('category', $_category);
         $this->display("category/edit.tpl");
     }
 
-    public function actionDelete()
+    public function actionDelete(): void
     {
-        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
+        $id = HtmlHelper::htmlSpecialChars($_GET['id']);
         $category = new Category();
+        $_category = $category->findById($id);
+        if(!isset($_category) || count($_category) < 1) {
+            $this->display("error/index.tpl");
+        }
+
         $category->id = (int)$id;
-        $category->is_active = 0;
-        $category->save();
+        $category->is_active = INACTIVE;
+        $category->insertOrUpdate();
+        $this->redirect("category");
     }
 }

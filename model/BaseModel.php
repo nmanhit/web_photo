@@ -2,9 +2,11 @@
 declare(strict_types=1);
 namespace model;
 
-include "database/database.php";
+include "helpers/Database.php";
+include "helpers/FormatConverter.php";
 
-use database\Database as Database;
+use helpers\Database as Database;
+use helpers\FormatConverter as FormatConverter;
 
 class BaseModel
 {
@@ -61,6 +63,7 @@ class BaseModel
     {
         $sql = "SELECT * FROM {$this->table_name()} WHERE " . $this->id_field . "=?;";
         $result = $this->db->execQuery($sql, array($id));
+        if($result -> num_rows < 1) return [];
         return mysqli_fetch_assoc($result);
     }
 
@@ -81,7 +84,7 @@ class BaseModel
         return $propertiesSet;
     }
 
-    public function save(): bool
+    public function insertOrUpdate(): bool
     {
         $this->properties = $this->getProperties();
         if ($this->exists()) {
@@ -105,7 +108,7 @@ class BaseModel
 
     protected function insert(): bool
     {
-        $currentTime = strtotime(date('Y-m-d H:i:s'));
+        $currentTime = FormatConverter::getCurrentTime();
         $this->properties["is_active"] = ACTIVE;
         $this->properties["create_time"] = $currentTime;
         $this->properties["update_time"] = $currentTime;
