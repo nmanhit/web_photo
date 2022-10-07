@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <h3 class="panel-title">Categories list</h3>
             <div class="panel-action">
-                <a href="/demo/index.php?controller=category&action=create" class="btn btn-primary">New category</a>
+                <a href="{$BASE_URL}index.php?controller=category&action=create" class="btn btn-primary">New category</a>
             </div>
         </div>
         <div class="panel-body">
@@ -24,8 +24,8 @@
                             <td>{$v.description}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="/demo/index.php?controller=category&action=detail&id={$v.id}" class="btn btn-primary">Edit</a>
-                                    <a href="/demo/index.php?controller=category&action=delete&id={$v.id}" class="btn btn-danger">Delete</a>
+                                    <a href="{$BASE_URL}index.php?controller=category&action=detail&id={$v.id}" class="btn btn-primary">Edit</a>
+                                    <a href="{$BASE_URL}index.php?controller=category&action=delete&id={$v.id}" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>

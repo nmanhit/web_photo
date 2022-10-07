@@ -54,7 +54,7 @@ class CategoryController extends BaseController
     public function actionDetail()
     {
         $category = new Category();
-        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
+        $id = HtmlHelper::htmlSpecialChars($_GET['id']);
         $_category = $category->findById($id);
         $this->smarty->assign('category', $_category);
         $this->display("category/edit.tpl");
