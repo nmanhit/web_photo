@@ -11,6 +11,7 @@ class Category extends BaseModel
     public int $id;
     public string $name;
     public string $description;
+    public string $photo;
     public int $is_active;
     public int $update_time;
     public int $create_time;
