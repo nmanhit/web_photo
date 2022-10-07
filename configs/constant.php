@@ -16,3 +16,7 @@ const CHARSET = "ISO-8859-1";
 const CONTROLLER_SUFFIX = "Controller";
 const ACTION_PREFIX = "action";
 const DATE_TIME_FORMAT = "Y-m-d H:i:s";
+
+const DIR_UPLOAD_FILE = BASE_DIR.'/static/upload/';
+const MAX_FILE_SIZE_UPLOAD_IN_MB = 50 * 1024 * 1024; // 50MB
+const FILE_EXTENSION_ALLOWED = array('jpg','jpeg','png','gif');

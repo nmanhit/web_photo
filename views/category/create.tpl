@@ -4,7 +4,7 @@
             <h3 class="panel-title">Create Category</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" action="{$BASE_URL}/index.php?controller=category&action=create" method="post">
+            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="{$BASE_URL}/index.php?controller=category&action=create" method="post">
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Name <span class="required">*</span></label>
                     <div class="col-sm-9">
@@ -15,6 +15,12 @@
                     <label for="firstName" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         <textarea rows="5" id="description" name="description" placeholder="Description" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">Photo</label>
+                    <div class="col-sm-9">
+                        <input type="file" id="photo" name="photo" accept="image/png, image/gif, image/jpeg" />
                     </div>
                 </div>
                 <div class="form-group">
