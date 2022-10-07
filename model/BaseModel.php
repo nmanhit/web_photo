@@ -1,14 +1,10 @@
 <?php
-
 declare(strict_types=1);
-
-
 namespace model;
 
 include "database/database.php";
 
 use database\Database as Database;
-
 
 class BaseModel
 {

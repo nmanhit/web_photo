@@ -1,12 +1,8 @@
 <?php
-
 declare(strict_types=1);
-
-
 namespace configs;
 
 include '/usr/local/lib/php/Smarty/Smarty.class.php';
-
 
 class smarty_instant extends \Smarty
 {

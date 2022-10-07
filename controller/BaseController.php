@@ -1,12 +1,9 @@
 <?php
-
 declare(strict_types=1);
-
 
 include("configs/smarty_instant.php");
 
 use configs\smarty_instant as Smarty;
-
 
 class BaseController
 {
@@ -27,8 +24,9 @@ class BaseController
         return $_SERVER['REQUEST_METHOD'] === "POST";
     }
 
-    public function redirect($url, $permanent = false): void
+    public function redirect($controller, $action = "index", $permanent = false): void
     {
+        $url = "/index.php?controller=".$controller."&action=".$action;
         header('Location: ' . getenv("BASE_URL") . $url, true, $permanent ? 301 : 302);
     }
 }

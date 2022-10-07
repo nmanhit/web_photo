@@ -1,13 +1,11 @@
 <?php
-
 declare(strict_types=1);
-
 
 include 'BaseController.php';
 include 'model/Category.php';
 
 use model\Category as Category;
-
+use helpers\Html as HtmlHelper;
 
 class CategoryController extends BaseController
 {
@@ -27,35 +25,35 @@ class CategoryController extends BaseController
     {
         $this->display("category/create.tpl");
         if ($this->isPost()) {
-            $name = htmlspecialchars($_POST['name'], REPLACE_FLAGS, CHARSET);
-            $description = htmlspecialchars($_POST['description'], REPLACE_FLAGS, CHARSET);
+            $name = HtmlHelper::htmlSpecialChars($_POST['name']);
+            $description = HtmlHelper::htmlSpecialChars($_POST['description']);
 
             $category = new Category();
             $category->name = $name;
             $category->description = $description;
             $category->save();
-            $this->redirect("/index.php?controller=category&action=index");
+            $this->redirect("category");
         }
     }
 
     public function actionEdit(): void
     {
-        $id = htmlspecialchars($_POST['id'], REPLACE_FLAGS, CHARSET);
-        $name = htmlspecialchars($_POST['name'], REPLACE_FLAGS, CHARSET);
-        $description = htmlspecialchars($_POST['description'], REPLACE_FLAGS, CHARSET);
+        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
+        $name = HtmlHelper::htmlSpecialChars($_POST['name']);
+        $description = HtmlHelper::htmlSpecialChars($_POST['description']);
 
         $category = new Category();
         $category->id = (int)$id;
         $category->name = $name;
         $category->description = $description;
         $category->save();
-        $this->redirect("/index.php?controller=category&action=index");
+        $this->redirect("category");
     }
 
     public function actionDetail()
     {
         $category = new Category();
-        $id = htmlspecialchars($_GET['id'], REPLACE_FLAGS, CHARSET);
+        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
         $_category = $category->findById($id);
         $this->smarty->assign('category', $_category);
         $this->display("category/edit.tpl");
@@ -63,7 +61,7 @@ class CategoryController extends BaseController
 
     public function actionDelete()
     {
-        $id = htmlspecialchars($_GET['id'], REPLACE_FLAGS, CHARSET);
+        $id = HtmlHelper::htmlSpecialChars($_POST['id']);
         $category = new Category();
         $category->id = (int)$id;
         $category->is_active = 0;

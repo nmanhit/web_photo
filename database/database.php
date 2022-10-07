@@ -1,18 +1,14 @@
 <?php
-
 declare(strict_types=1);
-
-
 namespace database;
 
 include "configs/database.php";
 
 use configs\database as databaseConfig;
 
-
 class Database extends databaseConfig
 {
-    public object|null $conn;
+    public object|null $connection;
     protected string $database;
     protected string $host;
     protected string $username;
@@ -20,7 +16,7 @@ class Database extends databaseConfig
 
     public function __construct()
     {
-        $this->conn = NULL;
+        $this->connection = NULL;
         $dbParam = new databaseConfig();
         $this->database = $dbParam->database;
         $this->host = $dbParam->host;
@@ -31,17 +27,16 @@ class Database extends databaseConfig
 
     public function dbConnect(): object
     {
-        $this->conn = new \mysqli($this->host, $this->username, $this->password, $this->database);
-        return $this->conn;
+        $this->connection = new \mysqli($this->host, $this->username, $this->password, $this->database);
+        return $this->connection;
     }
 
     public function execQuery($query, $bind_vars = []): object|bool
     {
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->connection->prepare($query);
         $stmt->execute($bind_vars);
         $result = $stmt->get_result();
         $stmt->close();
         return $result;
     }
-
 }
