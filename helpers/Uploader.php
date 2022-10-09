@@ -35,7 +35,8 @@ class Uploader
             return $result;
         }
 
-        $fileName = substr(md5(rand(1111,9999)),0,8).".".$ext;
+        $timeStamp = time();
+        $fileName = $timeStamp.substr(md5(rand(1111,9999)),0,8).".".$ext;
         $isUploaded = move_uploaded_file($_FILES[$file]["tmp_name"], DIR_UPLOAD_FILE.$fileName);
         if(!$isUploaded) {
             $result["message"] = UPLOAD_FAILED_TRY_LATER;

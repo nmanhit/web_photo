@@ -21,6 +21,7 @@ class CategoryController extends BaseController
             return $record["is_active"] == 1;
         }, ARRAY_FILTER_USE_BOTH);
         $this->smarty->assign('categories', $active_category);
+        $this->smarty->assign("IMG_PREVIEW_DEFAULT", IMG_PREVIEW_DEFAULT);
         $this->display("category/index.tpl");
     }
 
@@ -64,13 +65,29 @@ class CategoryController extends BaseController
         $id = HtmlHelper::htmlSpecialChars($_POST['id']);
         $name = HtmlHelper::htmlSpecialChars($_POST['name']);
         $description = HtmlHelper::htmlSpecialChars($_POST['description']);
-        $token = HtmlHelper::htmlSpecialChars($_POST['token']);
+        $token = isset($_POST['token']) ? HtmlHelper::htmlSpecialChars($_POST['token']) : "";
         $this->validateToken($token);
+
+        if(empty($name)) {
+            $this->display("error/index.tpl");
+        }
+
+        $photo = $_FILES['photo'];
+        $photoName = "";
+        if(!empty($photo)) {
+            $uploader = new Uploader();
+            $result = $uploader->uploadFile('photo');
+            if($result["isError"]) $this->display("error/index.tpl");
+            $photoName = $result["photoName"];
+        }
+
+        echo $photoName;
 
         $category = new Category();
         $category->id = (int)$id;
         $category->name = $name;
         $category->description = $description;
+        $category->photo = $photoName;
         $category->insertOrUpdate();
         $this->redirect("category");
     }

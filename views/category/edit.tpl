@@ -4,7 +4,7 @@
             <h3 class="panel-title">Edit Category</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" action="{$BASE_URL}index.php?controller=category&action=edit" method="POST">
+            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="{$BASE_URL}/index.php?controller=category&action=edit" method="post">
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Name <span class="required">*</span></label>
                     <div class="col-sm-9">
