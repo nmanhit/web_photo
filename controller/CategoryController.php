@@ -5,6 +5,7 @@ include 'BaseController.php';
 include 'model/Category.php';
 include 'helpers/Html.php';
 include 'helpers/Uploader.php';
+include_once 'configs/constant.php';
 
 use model\Category as Category;
 use helpers\Html as HtmlHelper;
@@ -28,10 +29,14 @@ class CategoryController extends BaseController
         if ($this->isPostMethod()) {
             $name = HtmlHelper::htmlSpecialChars($_POST['name']);
             $description = HtmlHelper::htmlSpecialChars($_POST['description']);
-            $photo = HtmlHelper::htmlSpecialChars($_FILES['photo']);
+            $photo = $_FILES['photo'];
 
-            $token = HtmlHelper::htmlSpecialChars($_POST['token']);
+            $token = isset($_POST['token']) ? HtmlHelper::htmlSpecialChars($_POST['token']) : "";
             $this->validateToken($token);
+
+            if(empty($name)) {
+                $this->display("error/index.tpl");
+            }
 
             $photoName = "";
             if(!empty($photo)) {
@@ -47,10 +52,10 @@ class CategoryController extends BaseController
             $category->photo = $photoName;
             $category->insertOrUpdate();
             $this->redirect("category");
-            return;
         }
         $_SESSION['token'] = bin2hex(random_bytes(35));
         $this->smarty->assign('token', $_SESSION['token']);
+        $this->smarty->assign("IMG_PREVIEW_DEFAULT", IMG_PREVIEW_DEFAULT);
         $this->display("category/create.tpl");
     }
 
@@ -77,8 +82,12 @@ class CategoryController extends BaseController
         $id = HtmlHelper::htmlSpecialChars($_GET['id']);
         $_category = $category->findById($id);
 
+        $categoryPhoto = IMG_PREVIEW_DEFAULT;
+        if(!empty($_category["photo"])) $categoryPhoto = BASE_URL."static/upload/".$_category["photo"];
+
         $this->smarty->assign('category', $_category);
         $this->smarty->assign('token', $_SESSION['token']);
+        $this->smarty->assign("categoryPhoto", $categoryPhoto);
         $this->display("category/edit.tpl");
     }
 

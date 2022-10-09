@@ -6,8 +6,8 @@ session_start();
 
 include(__DIR__ . "/configs/constant.php");
 
-$controller_get = $_GET["controller"] ?? "";
-$action_get = $_GET["action"] ?? "";
+$controller_get = $_GET["controller"] ?? CONTROLLER_DEFAULT;
+$action_get = $_GET["action"] ?? ACTION_DEFAULT;
 
 $controller = $controller_get . CONTROLLER_SUFFIX;
 $action = ACTION_PREFIX . $action_get;

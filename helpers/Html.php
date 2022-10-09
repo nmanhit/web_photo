@@ -6,6 +6,7 @@ class Html
 {
     public static function htmlSpecialChars($content): string
     {
+        if(empty($content)) return "";
         return htmlspecialchars((string)$content, REPLACE_FLAGS, CHARSET);
     }
 }

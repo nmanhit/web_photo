@@ -20,7 +20,11 @@
                 <div class="form-group">
                     <label for="photo" class="col-sm-3 control-label">Photo</label>
                     <div class="col-sm-9">
-                        <img class="category-img" src="{$BASE_URL}static/upload/{$category.photo}" />
+                        <div class="icon-upload-file">
+                            <img id="img-preview" alt="choose photo" title="choose photo" src="{$categoryPhoto}">
+                            <div class="text">Choose Photo</div>
+                            <input type="file" type="hidden" id="photo" name="photo" accept="image/png, image/gif, image/jpeg" />
+                        </div>
                     </div>
                 </div>
                 <input id="id" name="id" type="hidden" value="{$category.id}" placeholder="Id" />
