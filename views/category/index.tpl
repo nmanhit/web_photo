@@ -11,6 +11,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Photo</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
                     <th scope="col" style="width: 135px">Action</th>
@@ -18,8 +19,18 @@
                 </thead>
                 <tbody>
                     {foreach from=$categories key=k item=v}
+
                         <tr id="category-{$v.id}">
                             <th scope="row">{$v.id}</th>
+                            <th scope="row">
+                                <a href="{$BASE_URL}index.php?controller=category&action=detail&id={$v.id}">
+                                    {if $v.photo eq ''}
+                                        <img class="category-list-img" src="{$IMG_PREVIEW_DEFAULT}" />
+                                    {else}
+                                        <img class="category-list-img" src="{$BASE_URL}static/upload/{$v.photo}" />
+                                    {/if}
+                                </a>
+                            </th>
                             <td>{$v.name}</td>
                             <td>{$v.description}</td>
                             <td>

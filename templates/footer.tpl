@@ -7,3 +7,4 @@
 </footer>
 <script src="{$BASE_URL}static/jquery/index.min.js"></script>
 <script src="{$BASE_URL}static/bootstrap/bootstrap.min.js"></script>
+<script src="{$BASE_URL}static/index.js"></script>

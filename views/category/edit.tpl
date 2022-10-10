@@ -4,7 +4,7 @@
             <h3 class="panel-title">Edit Category</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="{$BASE_URL}index.php?controller=category&action=edit" method="POST">
+            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="{$BASE_URL}/index.php?controller=category&action=edit" method="post">
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Name <span class="required">*</span></label>
                     <div class="col-sm-9">
@@ -18,10 +18,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">Photo</label>
+                    <label for="photo" class="col-sm-3 control-label">Photo</label>
                     <div class="col-sm-9">
-                        <img src="static/upload/{$category.photo}" alt="category-photo" style="max-width: 100%; max-height: 300px" class="img-fluid">
-                        <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/gif, image/jpeg" />
+                        <div class="icon-upload-file">
+                            <img id="img-preview" alt="choose photo" title="choose photo" src="{$categoryPhoto}">
+                            <div class="text">Choose Photo</div>
+                            <input type="file" type="hidden" id="photo" name="photo" accept="image/png, image/gif, image/jpeg" />
+                        </div>
                     </div>
                 </div>
                 <input id="id" name="id" type="hidden" value="{$category.id}" placeholder="Id" />

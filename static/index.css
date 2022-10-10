@@ -39,6 +39,45 @@ body {
     font-style: italic;
 }
 
+.category-img {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.category-list-img {
+    width: 50px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.icon-upload-file {
+    width: 100px;
+    height: 100px;
+    font-style: italic;
+    border: 1px dotted #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.icon-upload-file img {
+    width: 70px;
+    margin-top: 3px;
+}
+
+.icon-upload-file input {
+    display: none;
+}
+
+.icon-upload-file .text {
+    position: absolute;
+    left: 30px;
+}
+
 .footer-bs {
     background-color: #3c3d41;
     padding: 30px 15px;
