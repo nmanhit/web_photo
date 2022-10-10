@@ -1,16 +1,15 @@
 <?php
 declare(strict_types=1);
 
-include 'BaseController.php';
-include 'model/Category.php';
-include 'helpers/Html.php';
-include 'helpers/Uploader.php';
-include_once 'helpers/FormatConverter.php';
-include_once 'configs/constant.php';
+require_once "BaseController.php";
+require_once "model/Category.php";
+require_once "helpers/Html.php";
+require_once "helpers/Uploader.php";
+require_once "helpers/FormatConverter.php";
+require_once "configs/constant.php";
 
 use model\Category as Category;
 use helpers\Html as HtmlHelper;
-use helpers\Uploader as Uploader;
 use helpers\FormatConverter as FormatConverter;
 
 class CategoryController extends BaseController
@@ -18,9 +17,9 @@ class CategoryController extends BaseController
     public function actionIndex(): void
     {
         $category = new Category();
-        $condition = "is_active = ".ACTIVE;
+        $condition = "is_active = " . ACTIVE;
         $categories = $category->getByCondition($condition);
-        $this->smarty->assign('categories', $categories);
+        $this->smarty->assign("categories", $categories);
         $this->smarty->assign("IMG_PREVIEW_DEFAULT", IMG_PREVIEW_DEFAULT);
         $this->display("category/index.tpl");
     }
@@ -31,8 +30,8 @@ class CategoryController extends BaseController
             $this->createOrUpdate("create");
             return;
         }
-        $_SESSION['token'] = FormatConverter::getRandomString();
-        $this->smarty->assign('token', $_SESSION['token']);
+        $_SESSION["token"] = FormatConverter::getRandomString();
+        $this->smarty->assign("token", $_SESSION["token"]);
         $this->smarty->assign("IMG_PREVIEW_DEFAULT", IMG_PREVIEW_DEFAULT);
         $this->display("category/create.tpl");
     }
@@ -44,26 +43,26 @@ class CategoryController extends BaseController
 
     public function actionDetail()
     {
-        $_SESSION['token'] = FormatConverter::getRandomString();
+        $_SESSION["token"] = FormatConverter::getRandomString();
         $category = new Category();
-        $id = HtmlHelper::htmlSpecialChars($_GET['id']);
+        $id = HtmlHelper::htmlSpecialChars($_GET["id"]);
         $_category = $category->findById((int)$id);
 
         $categoryPhoto = IMG_PREVIEW_DEFAULT;
-        if(!empty($_category["photo"])) $categoryPhoto = BASE_URL."static/upload/".$_category["photo"];
+        if (!empty($_category["photo"])) $categoryPhoto = BASE_URL . "static/upload/" . $_category["photo"];
 
-        $this->smarty->assign('category', $_category);
-        $this->smarty->assign('token', $_SESSION['token']);
+        $this->smarty->assign("category", $_category);
+        $this->smarty->assign("token", $_SESSION["token"]);
         $this->smarty->assign("categoryPhoto", $categoryPhoto);
         $this->display("category/edit.tpl");
     }
 
     public function actionDelete(): void
     {
-        $id = HtmlHelper::htmlSpecialChars($_GET['id']);
+        $id = HtmlHelper::htmlSpecialChars($_GET["id"]);
         $category = new Category();
         $_category = $category->findById((int)$id);
-        if(!isset($_category) || count($_category) < 1) {
+        if (!isset($_category) || count($_category) < 1) {
             $this->display("error/index.tpl");
         }
 
@@ -73,23 +72,24 @@ class CategoryController extends BaseController
         $this->redirect("category");
     }
 
-    private function createOrUpdate(string $type): void {
-        $name = HtmlHelper::htmlSpecialChars($_POST['name']);
-        $description = HtmlHelper::htmlSpecialChars($_POST['description']);
+    private function createOrUpdate(string $type): void
+    {
+        $name = HtmlHelper::htmlSpecialChars($_POST["name"]);
+        $description = HtmlHelper::htmlSpecialChars($_POST["description"]);
 
-        $token = HtmlHelper::htmlSpecialChars($_POST['token']);
-        if(!$this->validateToken($token)) return;
+        $token = HtmlHelper::htmlSpecialChars($_POST["token"]);
+        if (!$this->validateToken($token)) return;
 
         $category = new Category();
         $category->name = $name;
         $category->description = $description;
-        if($type == "edit") {
-            $id = HtmlHelper::htmlSpecialChars($_POST['id']);
+        if ($type == "edit") {
+            $id = HtmlHelper::htmlSpecialChars($_POST["id"]);
             $category->id = (int)$id;
         }
-        if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-            $photoName = $this->UploadImage("photo");
-            if(!$photoName) return;
+        if (is_uploaded_file($_FILES["photo"]["tmp_name"])) {
+            $photoName = $this->uploadImage("photo");
+            if (!$photoName) return;
 
             $category->photo = $photoName;
         }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace configs;
 
-include_once "constant.php";
+require_once "constant.php";
 
 class database
 {
@@ -15,7 +15,7 @@ class database
     public function __construct()
     {
         $this->host = DB_HOST;
-        $this->username = DB_USERNAME ;
+        $this->username = DB_USERNAME;
         $this->password = DB_PASSWORD;
         $this->database = DB_DATABASE;
     }

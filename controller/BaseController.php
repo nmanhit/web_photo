@@ -1,11 +1,10 @@
 <?php
 declare(strict_types=1);
 
-include("configs/smarty_instant.php");
+require_once "configs/SmartyInstant.php";
 
-use configs\smarty_instant as Smarty;
+use configs\SmartyInstant as Smarty;
 use helpers\Uploader as Uploader;
-
 
 class BaseController
 {
@@ -18,33 +17,34 @@ class BaseController
 
     public function display(string $template): void
     {
-        $this->smarty->display(BASE_DIR . '/views/' . $template);
+        $this->smarty->display(BASE_DIR . "/views/" . $template);
     }
 
     public function isPostMethod(): bool
     {
-        return $_SERVER['REQUEST_METHOD'] === "POST";
+        return $_SERVER["REQUEST_METHOD"] === "POST";
     }
 
     public function redirect($controller, $action = "index", $permanent = false): void
     {
-        $url = BASE_URL . "/index.php?controller=".$controller."&action=".$action;
-        echo $url;
-        header('Location: ' . $url, true, $permanent ? STATUS_301 : STATUS_302);
+        $url = BASE_URL . "/index.php?controller=" . $controller . "&action=" . $action;
+        header("Location: " . $url, true, $permanent ? STATUS_301 : STATUS_302);
     }
 
-    public function validateToken(string $token): bool {
-        if (!$token || $token !== $_SESSION['token']) {
+    public function validateToken(string $token): bool
+    {
+        if (!$token || $token !== $_SESSION["token"]) {
             $this->redirect("error");
             return false;
         }
         return true;
     }
 
-    public function UploadImage(string $photo): string {
+    public function uploadImage(string $photo): string
+    {
         $uploader = new Uploader();
         $result = $uploader->uploadFile($photo);
-        if($result["isError"]) {
+        if ($result["isError"]) {
             $this->redirect("error");
             return "";
         };
