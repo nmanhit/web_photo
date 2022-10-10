@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
+
 namespace helpers;
+
 include "configs/database.php";
 
 use configs\database as databaseConfig;
@@ -30,7 +32,7 @@ class Database extends databaseConfig
         return $this->connection;
     }
 
-    public function execQuery($query, $bind_vars = []): object|bool
+    public function execQuery(string $query, array $bind_vars = []): object|bool
     {
         $stmt = $this->connection->prepare($query);
         $stmt->execute($bind_vars);

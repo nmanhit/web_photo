@@ -7,19 +7,19 @@ include "BaseModel.php";
 
 use model\BaseModel as BaseModel;
 
-class Category extends BaseModel
+class User extends BaseModel
 {
     public int $id;
-    public string $name;
-    public string $description;
-    public string $photo;
+    public string $email;
+    public string $password;
+    public string $full_name;
+    public string $avatar;
     public int $is_active;
     public int $update_time;
     public int $create_time;
-    public int $create_by;
 
     public function table_name(): string
     {
-        return "tbl_categories";
+        return "tbl_user";
     }
 }

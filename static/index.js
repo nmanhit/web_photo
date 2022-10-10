@@ -1,5 +1,5 @@
 const choosePhotoElms = document.getElementsByClassName("icon-upload-file");
-if(choosePhotoElms) {
+if(choosePhotoElms.length > 0) {
     const choosePhotoElm = choosePhotoElms[0];
     const fileInputElm = document.getElementById("photo");
 
@@ -18,4 +18,3 @@ if(choosePhotoElms) {
         }
     });
 }
-

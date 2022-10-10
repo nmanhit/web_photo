@@ -4,6 +4,8 @@ declare(strict_types=1);
 include("configs/smarty_instant.php");
 
 use configs\smarty_instant as Smarty;
+use helpers\Uploader as Uploader;
+
 
 class BaseController
 {
@@ -14,7 +16,7 @@ class BaseController
         $this->smarty = new Smarty();
     }
 
-    public function display($template): void
+    public function display(string $template): void
     {
         $this->smarty->display(BASE_DIR . '/views/' . $template);
     }
@@ -27,12 +29,25 @@ class BaseController
     public function redirect($controller, $action = "index", $permanent = false): void
     {
         $url = BASE_URL . "/index.php?controller=".$controller."&action=".$action;
-        header('Location: ' . $url, true, $permanent ? 301 : 302);
+        echo $url;
+        header('Location: ' . $url, true, $permanent ? STATUS_301 : STATUS_302);
     }
 
-    public function validateToken($token): void {
+    public function validateToken(string $token): bool {
         if (!$token || $token !== $_SESSION['token']) {
-            $this->display("error/index.tpl");
+            $this->redirect("error");
+            return false;
         }
+        return true;
+    }
+
+    public function UploadImage(string $photo): string {
+        $uploader = new Uploader();
+        $result = $uploader->uploadFile($photo);
+        if($result["isError"]) {
+            $this->redirect("error");
+            return "";
+        };
+        return $result["photoName"];
     }
 }
