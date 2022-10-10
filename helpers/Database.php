@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace helpers;
 
-include "configs/database.php";
+require_once "configs/database.php";
 
 use configs\database as databaseConfig;
 

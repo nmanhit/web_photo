@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace helpers;
 
-include "configs/message.php";
-include_once 'FormatConverter.php';
+require_once "configs/message.php";
+require_once "FormatConverter.php";
 
 use helpers\FormatConverter as FormatConverter;
 

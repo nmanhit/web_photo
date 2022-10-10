@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace model;
 
-include "helpers/Database.php";
-include "helpers/FormatConverter.php";
+require_once "helpers/Database.php";
+require_once "helpers/FormatConverter.php";
 
 use helpers\Database as Database;
 use helpers\FormatConverter as FormatConverter;
@@ -12,21 +12,21 @@ use helpers\FormatConverter as FormatConverter;
 class BaseModel
 {
     protected object $db;
+    protected string $idField = "id";
     protected array $properties = [];
-    protected string $id_field = "id";
-    private array $properties_ignore_update = array("id", "create_time", "create_by");
+    protected array $properties_ignore_update = array("id", "create_time", "create_by");
 
     public function __construct()
     {
         $this->setDB();
     }
 
-    protected function table_name(): string
+    protected function tableName(): string
     {
-        $get_table_method = "table_name";
+        $get_table_method = "tableName";
         if (method_exists($this, $get_table_method) && is_callable(array($this, $get_table_method))) {
             return call_user_func(
-                array($this, "table_name")
+                array($this, "tableName")
             );
         }
         return "";
@@ -34,7 +34,7 @@ class BaseModel
 
     public function exists(): bool
     {
-        if (isset($this->properties) && array_key_exists($this->id_field, $this->properties)) {
+        if (isset($this->properties) && array_key_exists($this->idField, $this->properties)) {
             return true;
         }
         return false;
@@ -49,7 +49,7 @@ class BaseModel
 
     public function getAll(): array
     {
-        $sql = "SELECT * FROM {$this->table_name()}";
+        $sql = "SELECT * FROM {$this->tableName()}";
         $result = $this->db->execQuery($sql);
         if ($result->num_rows == 0) return [];
 
@@ -62,7 +62,7 @@ class BaseModel
 
     public function getByCondition(string $condition): array
     {
-        $sql = "SELECT * FROM {$this->table_name()} WHERE ".$condition;
+        $sql = "SELECT * FROM {$this->tableName()} WHERE ".$condition;
         $result = $this->db->execQuery($sql);
         if ($result->num_rows == 0) return [];
 
@@ -75,7 +75,7 @@ class BaseModel
 
     public function findById(int $id): array
     {
-        $sql = "SELECT * FROM {$this->table_name()} WHERE " . $this->id_field . "=?;";
+        $sql = "SELECT * FROM {$this->tableName()} WHERE " . $this->idField . "=?;";
         $result = $this->db->execQuery($sql, array($id));
         if($result -> num_rows < 1) return [];
         return mysqli_fetch_assoc($result);
@@ -109,7 +109,7 @@ class BaseModel
 
     protected function update(): bool
     {
-        $id = $this->properties[$this->id_field];
+        $id = $this->properties[$this->idField];
         $this->properties = array_filter($this->properties, function ($column) {
             return !in_array("$column", $this->properties_ignore_update);
         }, ARRAY_FILTER_USE_KEY);
@@ -146,7 +146,7 @@ class BaseModel
             $sql_set .= " " . $property . "=?,";
         }
         $sql_set = substr_replace($sql_set, "", -1);
-        return "UPDATE {$this->table_name()} SET $sql_set WHERE " . $this->id_field . "=?;";
+        return "UPDATE {$this->tableName()} SET $sql_set WHERE " . $this->idField . "=?;";
     }
 
 
@@ -160,6 +160,6 @@ class BaseModel
         }
         $sql_key = substr_replace($sql_key, "", -1);
         $sql_value = substr_replace($sql_value, "", -1);
-        return "INSERT INTO {$this->table_name()} ($sql_key) VALUES ($sql_value);";
+        return "INSERT INTO {$this->tableName()} ($sql_key) VALUES ($sql_value);";
     }
 }

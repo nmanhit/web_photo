@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace configs;
 
-include '/usr/local/lib/php/Smarty/Smarty.class.php';
+require_once "/usr/local/lib/php/Smarty/Smarty.class.php";
 
-class smarty_instant extends \Smarty
+class SmartyInstant extends \Smarty
 {
     function __construct()
     {

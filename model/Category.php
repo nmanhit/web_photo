@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace model;
 
-include "BaseModel.php";
+require_once "BaseModel.php";
 
 use model\BaseModel as BaseModel;
 
@@ -18,7 +18,7 @@ class Category extends BaseModel
     public int $create_time;
     public int $create_by;
 
-    public function table_name(): string
+    public function tableName(): string
     {
         return "tbl_categories";
     }
