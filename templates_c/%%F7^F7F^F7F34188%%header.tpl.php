@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-10-07 06:34:11
+<?php /* Smarty version 2.6.31, created on 2022-10-10 01:22:09
          compiled from header.tpl */ ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

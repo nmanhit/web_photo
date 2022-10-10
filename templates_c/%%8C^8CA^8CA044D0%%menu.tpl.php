@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2022-10-07 08:34:23
+<?php /* Smarty version 2.6.31, created on 2022-10-10 01:22:09
          compiled from menu.tpl */ ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -14,9 +14,9 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo $this->_tpl_vars['BASE_URL']; ?>
-/index.php?controller=category&action=index">Categories</a></li>
+index.php?controller=category&action=index">Categories</a></li>
                 <li><a href="<?php echo $this->_tpl_vars['BASE_URL']; ?>
-Controller/user/sign_up.php">User</a></li>
+index.php?controller=user&action=index">User</a></li>
                 <li><a href="<?php echo $this->_tpl_vars['BASE_URL']; ?>
 Controller/photo/index.php">My Photo</a></li>
             </ul>

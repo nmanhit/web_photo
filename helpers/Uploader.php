@@ -1,13 +1,13 @@
 <?php
+declare(strict_types=1);
+
 namespace helpers;
 
-include_once "configs/message.php";
-
-use http\Params;
+include "configs/message.php";
 
 class Uploader
 {
-    public function getExtension($fileName) : string {
+    public function getExtension(string $fileName) : string {
         try{
             $parts = explode(".",$fileName);
             return strtolower($parts[count($parts)-1]);
@@ -16,7 +16,7 @@ class Uploader
         }
     }
 
-    public function uploadFile($file, $destinationPath = DIR_UPLOAD_FILE): array {
+    public function uploadFile(string $file,string $destinationPath = DIR_UPLOAD_FILE): array {
         $size = $_FILES[$file]["size"];
         $name = $_FILES[$file]["name"];
         $ext = Uploader::getExtension($name);
@@ -35,7 +35,7 @@ class Uploader
             return $result;
         }
 
-        $fileName = substr(md5(rand(1111,9999)),0,8).".".$ext;
+        $fileName = substr(md5((string)rand(1111, 9999)),0,8).".".$ext;
         $isUploaded = move_uploaded_file($_FILES[$file]["tmp_name"], DIR_UPLOAD_FILE.$fileName);
         if(!$isUploaded) {
             $result["message"] = UPLOAD_FAILED_TRY_LATER;
@@ -46,7 +46,7 @@ class Uploader
         return $result;
     }
 
-    public static function deleteFile($fileName) : bool {
+    public static function deleteFile(string $fileName) : bool {
         return unlink(DIR_UPLOAD_FILE.$fileName);
     }
 }

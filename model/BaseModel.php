@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace model;
 
 include "helpers/Database.php";
@@ -59,7 +60,7 @@ class BaseModel
         return $categories;
     }
 
-    public function findById($id): array
+    public function findById(int $id): array
     {
         $sql = "SELECT * FROM {$this->table_name()} WHERE " . $this->id_field . "=?;";
         $result = $this->db->execQuery($sql, array($id));
@@ -112,9 +113,15 @@ class BaseModel
         $this->properties["is_active"] = ACTIVE;
         $this->properties["create_time"] = $currentTime;
         $this->properties["update_time"] = $currentTime;
-        $this->properties["create_by"] = LOGIN_ID;
+        $called_vars = array_keys(get_class_vars(get_class($this)));
+
+        if(in_array("create_by", $called_vars)) {
+            $this->properties["create_by"] = LOGIN_ID;
+        }
+
         $data = array_values($this->properties);
         $query = $this->getQueryInsert();
+        echo $query;
         $this->db->execQuery($query, $data);
         return true;
     }

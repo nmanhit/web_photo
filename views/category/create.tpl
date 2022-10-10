@@ -18,9 +18,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">Photo</label>
+                    <label for="photo" class="col-sm-3 control-label">Photo</label>
                     <div class="col-sm-9">
-                        <input type="file" id="photo" name="photo" accept="image/png, image/gif, image/jpeg" />
+                        <input class="form-control" type="file" id="photo" name="photo" accept="image/png, image/gif, image/jpeg">
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,6 +29,7 @@
                         <a href="{$BASE_URL}/index.php?controller=category&action=index" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
+                <input type="hidden" name="token" value="{$token}" />
             </form>
         </div>
     </div>
