@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace helpers;
 
 include "configs/message.php";
+include_once 'FormatConverter.php';
+
+use helpers\FormatConverter as FormatConverter;
 
 class Uploader
 {
@@ -35,8 +38,7 @@ class Uploader
             return $result;
         }
 
-        $timeStamp = time();
-        $fileName = $timeStamp.substr(md5(rand(1111,9999)),0,8).".".$ext;
+        $fileName = FormatConverter::getRandomString().".$ext";
         $isUploaded = move_uploaded_file($_FILES[$file]["tmp_name"], DIR_UPLOAD_FILE.$fileName);
         if(!$isUploaded) {
             $result["message"] = UPLOAD_FAILED_TRY_LATER;

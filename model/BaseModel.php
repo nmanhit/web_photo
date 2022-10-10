@@ -60,6 +60,19 @@ class BaseModel
         return $categories;
     }
 
+    public function getByCondition(string $condition): array
+    {
+        $sql = "SELECT * FROM {$this->table_name()} WHERE ".$condition;
+        $result = $this->db->execQuery($sql);
+        if ($result->num_rows == 0) return [];
+
+        $categories = [];
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row;
+        }
+        return $categories;
+    }
+
     public function findById(int $id): array
     {
         $sql = "SELECT * FROM {$this->table_name()} WHERE " . $this->id_field . "=?;";

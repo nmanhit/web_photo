@@ -33,17 +33,20 @@ class BaseController
         header('Location: ' . $url, true, $permanent ? STATUS_301 : STATUS_302);
     }
 
-    public function validateToken(string $token): void {
+    public function validateToken(string $token): bool {
         if (!$token || $token !== $_SESSION['token']) {
-            $this->display("error/index.tpl");
+            $this->redirect("error");
+            return false;
         }
+        return true;
     }
 
     public function UploadImage(string $photo): string {
         $uploader = new Uploader();
         $result = $uploader->uploadFile($photo);
         if($result["isError"]) {
-            $this->display("error/index.tpl");
+            $this->redirect("error");
+            return "";
         };
         return $result["photoName"];
     }
